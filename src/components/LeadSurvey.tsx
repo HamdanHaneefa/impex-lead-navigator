@@ -170,28 +170,29 @@ export function LeadSurvey() {
   }, [step]);
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-card/70 p-5 shadow-2xl shadow-black/40 backdrop-blur sm:p-7">
+    <div className="rounded-2xl border border-white/10 bg-card/70 p-3.5 shadow-2xl shadow-black/40 backdrop-blur sm:p-7">
       {/* Progress */}
       {step !== "success" && (
-        <div className="mb-6">
-          <div className="mb-2 flex items-center justify-between text-xs text-white/60">
+        <div className="mb-3 sm:mb-6">
+          <div className="mb-1.5 flex items-center justify-between text-[10px] text-white/60 sm:text-xs">
             <span className="font-medium uppercase tracking-wider text-primary">
               {stepTitle.eyebrow}
             </span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <Progress value={progress} className="h-1.5 bg-white/10" />
+          <Progress value={progress} className="h-1 bg-white/10 sm:h-1.5" />
         </div>
       )}
 
       {step !== "success" && (
-        <header className="mb-6">
-          <h2 className="text-balance text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+        <header className="mb-3 sm:mb-6">
+          <h2 className="text-balance text-lg font-semibold leading-tight tracking-tight sm:text-3xl">
             {stepTitle.title}
           </h2>
-          <p className="mt-2 text-sm text-white/60 sm:text-base">{stepTitle.sub}</p>
+          <p className="mt-1 text-xs text-white/60 sm:mt-2 sm:text-base">{stepTitle.sub}</p>
         </header>
       )}
+
 
       {/* Steps */}
       {step === "environment" && (
