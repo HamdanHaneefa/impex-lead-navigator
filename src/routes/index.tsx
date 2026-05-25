@@ -3,6 +3,7 @@ import { Cpu, Hand, MonitorPlay, ShieldCheck, Sparkles, Star, Zap, Truck, BadgeC
 import { LeadSurvey } from "@/components/LeadSurvey";
 import { Toaster } from "@/components/ui/sonner";
 import heroImage from "@/assets/ifpd-hero.jpg";
+import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -28,10 +29,10 @@ function LandingPage() {
       {/* Compact top bar */}
       <header className="sticky top-0 z-20 border-b border-white/5 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3">
-          <span className="text-lg font-black tracking-tight sm:text-xl">
-            <span className="text-primary">IMPEX</span>
-            <span className="ml-1.5 text-xs font-medium text-white/60 sm:text-sm">xSeries</span>
-          </span>
+          <div className="flex items-center gap-2">
+            <img src={logo} alt="IMPEX" className="h-8 w-auto sm:h-10" />
+            <span className="ml-1 text-xs font-medium text-white/60 sm:text-sm">xSeries</span>
+          </div>
           <div className="flex items-center gap-2 text-[11px] text-white/70 sm:text-sm">
             <span className="hidden items-center gap-1 sm:inline-flex">
               <BadgeCheck className="size-4 text-primary" /> Govt. e-Marketplace listed

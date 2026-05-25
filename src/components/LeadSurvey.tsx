@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/integrations/supabase/client";
+import { submitToGoogleSheets } from "@/lib/google-sheets";
 import { toast } from "sonner";
 
 type ChoiceOption = {
@@ -128,7 +128,7 @@ export function LeadSurvey() {
     setErrors({});
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("leads").insert({
+      const formData = {
         environment,
         display_size: size,
         quantity,
@@ -141,9 +141,12 @@ export function LeadSurvey() {
         role: parsed.data.role || null,
         notes: parsed.data.notes || null,
         source: typeof window !== "undefined" ? (window.location.search || "google-ads") : "google-ads",
-      });
-      if (error) throw error;
+        timestamp: new Date().toISOString(),
+      };
+      
+      await submitToGoogleSheets(formData);
       setStep("success");
+      toast.success("Form submitted successfully!");
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong. Please try again.");
