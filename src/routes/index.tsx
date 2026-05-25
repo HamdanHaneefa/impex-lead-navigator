@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Cpu, Hand, MonitorPlay, ShieldCheck, Sparkles, Star, Zap, Truck, BadgeCheck } from "lucide-react";
+import { Cpu, Hand, MonitorPlay, ShieldCheck, Zap, Truck, BadgeCheck } from "lucide-react";
 import { LeadSurvey } from "@/components/LeadSurvey";
 import { Toaster } from "@/components/ui/sonner";
 import heroImage from "@/assets/ifpd-hero.jpg";
@@ -34,10 +34,7 @@ function LandingPage() {
             <span className="ml-1 text-xs font-medium text-white/60 sm:text-sm">xSeries</span>
           </div>
           <div className="flex items-center gap-2 text-[11px] text-white/70 sm:text-sm">
-            <span className="hidden items-center gap-1 sm:inline-flex">
-              <BadgeCheck className="size-4 text-primary" /> Govt. e-Marketplace listed
-            </span>
-            <a href="tel:+919000000000" className="rounded-full border border-white/10 px-3 py-1 font-medium hover:border-primary/60 hover:text-white">
+            <a href="tel:+918047181903" className="rounded-full border border-white/10 px-3 py-1 font-medium hover:border-primary/60 hover:text-white">
               Call sales
             </a>
           </div>
@@ -67,10 +64,7 @@ function LandingPage() {
 
           {/* DESKTOP pitch */}
           <div className="hidden lg:block">
-            <span className="chip">
-              <Sparkles className="size-3 text-primary" /> Trusted by 1,200+ Indian institutions
-            </span>
-            <h1 className="mt-4 text-balance text-5xl font-bold leading-[1.05] tracking-tight lg:text-[3.4rem]">
+            <h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight lg:text-[3.4rem]">
               The boardroom-grade smart screen{" "}
               <span className="bg-gradient-to-r from-primary to-rose-400 bg-clip-text text-transparent">
                 your team actually uses.
@@ -87,16 +81,6 @@ function LandingPage() {
               <Feature icon={<Cpu className="size-4" />} label="Android 14 + Workspace" />
               <Feature icon={<ShieldCheck className="size-4" />} label="3-yr on-site warranty" />
             </ul>
-
-            <div className="mt-6 flex items-center gap-4">
-              <div className="flex items-center gap-0.5 text-primary">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="size-4 fill-current" />
-                ))}
-                <span className="ml-2 text-sm font-semibold text-white">4.9 / 5</span>
-              </div>
-              <span className="text-sm text-white/55">·  Free pan-India installation</span>
-            </div>
 
             <div className="relative mt-8 overflow-hidden rounded-2xl border border-white/10">
               <img
