@@ -66,7 +66,7 @@ function LandingPage() {
               for schools and offices.
             </h1>
             <p className="mt-1.5 text-[13px] leading-snug text-white/65">
-              Get a custom quote with installation included — delivered in 30 seconds.
+              Get a custom quote with installation included — our team responds within 1 working day.
             </p>
           </div>
 
