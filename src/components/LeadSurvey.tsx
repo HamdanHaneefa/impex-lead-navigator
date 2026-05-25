@@ -167,6 +167,8 @@ export function LeadSurvey() {
       
       await submitToGoogleSheets(formData);
       setStep("success");
+      // Scroll to top on success
+      window.scrollTo({ top: 0, behavior: "smooth" });
       toast.success("Form submitted successfully!");
     } catch (err) {
       console.error(err);
@@ -194,26 +196,26 @@ export function LeadSurvey() {
   }, [step]);
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-card/70 p-3.5 shadow-2xl shadow-black/40 backdrop-blur sm:p-7">
+    <div className="rounded-2xl border border-white/10 bg-card/70 p-3 shadow-2xl shadow-black/40 backdrop-blur sm:p-5">
       {/* Progress */}
       {step !== "success" && (
-        <div className="mb-3 sm:mb-6">
-          <div className="mb-1.5 flex items-center justify-between text-[10px] text-white/60 sm:text-xs">
+        <div className="mb-2 sm:mb-4">
+          <div className="mb-1 flex items-center justify-between text-[10px] text-white/60 sm:mb-1.5 sm:text-xs">
             <span className="font-medium uppercase tracking-wider text-primary">
               {stepTitle.eyebrow}
             </span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <Progress value={progress} className="h-1 bg-white/10 sm:h-1.5" />
+          <Progress value={progress} className="h-1 bg-white/10" />
         </div>
       )}
 
       {step !== "success" && (
-        <header className="mb-3 sm:mb-6">
-          <h2 className="text-balance text-lg font-semibold leading-tight tracking-tight sm:text-3xl">
+        <header className="mb-2 sm:mb-4">
+          <h2 className="text-balance text-base font-semibold leading-tight tracking-tight sm:text-2xl">
             {stepTitle.title}
           </h2>
-          <p className="mt-1 text-xs text-white/60 sm:mt-2 sm:text-base">{stepTitle.sub}</p>
+          <p className="mt-0.5 text-[11px] text-white/60 sm:mt-1 sm:text-sm">{stepTitle.sub}</p>
         </header>
       )}
 
@@ -232,9 +234,9 @@ export function LeadSurvey() {
       )}
 
       {step === "details" && (
-        <div className="space-y-5">
+        <div className="space-y-2.5 sm:space-y-3">
           {/* Premium Card Layout */}
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
             {/* Name */}
             <FloatingLabelInput
               icon={<User className="size-4" />}
@@ -263,7 +265,7 @@ export function LeadSurvey() {
             />
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
             {/* Phone */}
             <FloatingLabelInput
               icon={<Phone className="size-4" />}
@@ -292,7 +294,7 @@ export function LeadSurvey() {
             />
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
             {/* City */}
             <FloatingLabelInput
               icon={<MapPin className="size-4" />}
@@ -320,16 +322,16 @@ export function LeadSurvey() {
 
           {/* Notes */}
           <div className="relative">
-            <label className="mb-2 block text-xs font-medium text-white/70">
+            <label className="mb-1 block text-[11px] font-medium text-white/70 sm:text-xs">
               Special requirements? (optional)
             </label>
             <Textarea
-              rows={3}
+              rows={2}
               maxLength={1000}
-              placeholder="Room size, existing setup, budget constraints..."
+              placeholder="Room size, existing setup, budget..."
               value={details.notes}
               onChange={(e) => setDetails({ ...details, notes: e.target.value })}
-              className="resize-none border-white/20 bg-white/5 text-base backdrop-blur-sm transition-all focus:border-primary/60 focus:bg-white/10"
+              className="resize-none border-white/20 bg-white/5 text-xs backdrop-blur-sm transition-all focus:border-primary/60 focus:bg-white/10 sm:text-sm"
             />
           </div>
 
@@ -338,78 +340,78 @@ export function LeadSurvey() {
             size="lg"
             disabled={submitting}
             onClick={handleSubmit}
-            className="group relative mt-4 h-14 w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary via-primary to-rose-500 text-base font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40"
+            className="group relative mt-2 h-11 w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary via-primary to-rose-500 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 sm:mt-3 sm:h-12"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">
               {submitting ? (
                 <>
-                  <Loader2 className="size-5 animate-spin" /> Processing...
+                  <Loader2 className="size-4 animate-spin" /> Processing...
                 </>
               ) : (
                 <>
-                  <Zap className="size-5" /> Get my free quote
-                  <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
+                  <Zap className="size-4" /> Get my free quote
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </>
               )}
             </span>
             <div className="absolute inset-0 -z-0 bg-gradient-to-r from-rose-500 to-primary opacity-0 transition-opacity group-hover:opacity-100" />
           </Button>
 
-          <p className="text-center text-[11px] leading-relaxed text-white/50">
+          <p className="text-center text-[9px] leading-relaxed text-white/50 sm:text-[10px]">
             🔒 Your information is secure. We'll only use it to send your quote.
           </p>
         </div>
       )}
 
       {step === "success" && (
-        <div className="py-6 text-center sm:py-8">
-          <div className="mx-auto mb-6 grid size-20 place-items-center rounded-full bg-gradient-to-br from-primary/20 to-primary/5 ring-1 ring-primary/30">
-            <div className="grid size-14 place-items-center rounded-full bg-primary/20">
-              <Check className="size-7 text-primary" strokeWidth={3} />
+        <div className="py-4 text-center sm:py-5">
+          <div className="mx-auto mb-4 grid size-16 place-items-center rounded-full bg-gradient-to-br from-primary/20 to-primary/5 ring-1 ring-primary/30 sm:size-18">
+            <div className="grid size-11 place-items-center rounded-full bg-primary/20 sm:size-12">
+              <Check className="size-6 text-primary sm:size-7" strokeWidth={3} />
             </div>
           </div>
           
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Request Submitted Successfully</h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70">
+          <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Request Submitted Successfully</h2>
+          <p className="mx-auto mt-2 max-w-lg text-xs leading-relaxed text-white/70 sm:mt-3 sm:text-sm">
             Thank you for your interest in IMPEX xSeries Interactive Displays. Our sales specialist will contact you within one business day with a personalized quote and complimentary on-site demonstration.
           </p>
 
-          <div className="mx-auto mt-8 max-w-2xl">
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/50">Your Selection Summary</h3>
-            <div className="grid gap-3 sm:grid-cols-3">
+          <div className="mx-auto mt-5 max-w-2xl sm:mt-6">
+            <h3 className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-white/50 sm:mb-3 sm:text-xs">Your Selection Summary</h3>
+            <div className="grid gap-2.5 sm:grid-cols-3 sm:gap-3">
               <SummaryStat icon={<Monitor className="size-4" />} label="Environment" value={labelFor(ENV_OPTIONS, environment)} />
               <SummaryStat icon={<Package className="size-4" />} label="Size & Quantity" value={`${labelFor(SIZE_OPTIONS, size)} • ${labelFor(QTY_OPTIONS, quantity)}`} />
               <SummaryStat icon={<CalendarClock className="size-4" />} label="Timeline" value={labelFor(TIMELINE_OPTIONS, timeline)} />
             </div>
           </div>
 
-          <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-center">
+          <div className="mt-5 flex flex-col items-center gap-2.5 border-t border-white/10 pt-4 sm:mt-6 sm:flex-row sm:justify-center sm:gap-3 sm:pt-5">
             <button
               onClick={resetForm}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary/90"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-white transition-all hover:bg-primary/90 sm:text-sm"
             >
-              <ArrowRight className="size-4" />
+              <ArrowRight className="size-3.5 sm:size-4" />
               Submit Another Request
             </button>
             <a 
               href="https://ifpd.impexstore.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/80 transition-all hover:border-primary/60 hover:bg-white/10 hover:text-white"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-3.5 py-2 text-xs font-medium text-white/80 transition-all hover:border-primary/60 hover:bg-white/10 hover:text-white sm:text-sm"
             >
-              <Monitor className="size-4" />
+              <Monitor className="size-3.5 sm:size-4" />
               Explore Product Catalog
             </a>
             <a 
               href="tel:+918047181903"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/80 transition-all hover:border-primary/60 hover:bg-white/10 hover:text-white"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-3.5 py-2 text-xs font-medium text-white/80 transition-all hover:border-primary/60 hover:bg-white/10 hover:text-white sm:text-sm"
             >
-              <Phone className="size-4" />
+              <Phone className="size-3.5 sm:size-4" />
               Call Sales Team
             </a>
           </div>
 
-          <p className="mt-6 text-xs text-white/40">
+          <p className="mt-4 text-[10px] text-white/40 sm:mt-5 sm:text-xs">
             Reference ID: {new Date().getTime().toString(36).toUpperCase()}
           </p>
         </div>
@@ -466,17 +468,17 @@ function FloatingLabelInput({
           error && "border-destructive/60"
         )}
       >
-        <div className="flex items-center gap-3 p-4">
+        <div className="flex items-center gap-2 p-2.5 sm:gap-2.5 sm:p-3">
           <span className={cn("shrink-0 transition-colors", focused ? "text-primary" : "text-white/50")}>
             {icon}
           </span>
-          <div className="relative flex-1 min-w-0">
+          <div className="relative min-w-0 flex-1">
             <label
               className={cn(
                 "pointer-events-none absolute left-0 origin-left transition-all duration-200",
                 hasValue || focused
-                  ? "-translate-y-3 scale-75 text-[10px] font-medium text-white/70"
-                  : "translate-y-0 scale-100 text-sm text-white/50"
+                  ? "-translate-y-2.5 scale-75 text-[9px] font-medium text-white/70 sm:-translate-y-3 sm:text-[10px]"
+                  : "translate-y-0 scale-100 text-xs text-white/50 sm:text-sm"
               )}
             >
               {label}
@@ -491,8 +493,8 @@ function FloatingLabelInput({
               autoComplete={type === "email" ? "email" : type === "tel" ? "tel" : "name"}
               name={type === "email" ? "email" : type === "tel" ? "tel" : "name"}
               className={cn(
-                "autofill-dark w-full border-none bg-transparent text-base text-white outline-none placeholder:text-white/30",
-                hasValue || focused ? "mt-3" : "mt-0"
+                "autofill-dark w-full border-none bg-transparent text-sm text-white outline-none placeholder:text-white/30 sm:text-base",
+                hasValue || focused ? "mt-2.5 sm:mt-3" : "mt-0"
               )}
             />
           </div>
@@ -574,12 +576,12 @@ function ChoiceGrid({
 
 function SummaryStat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-left backdrop-blur-sm">
-      <div className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-white/50">
+    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 text-left backdrop-blur-sm sm:p-3">
+      <div className="mb-1 flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-white/50 sm:mb-1.5 sm:text-[11px]">
         <span className="text-primary">{icon}</span>
         {label}
       </div>
-      <div className="text-base font-semibold text-white">{value}</div>
+      <div className="text-sm font-semibold text-white sm:text-base">{value}</div>
     </div>
   );
 }

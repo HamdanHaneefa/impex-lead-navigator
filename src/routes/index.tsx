@@ -59,28 +59,27 @@ function LandingPage() {
               <Zap className="size-3 text-primary" /> Limited offer · Free demo + bulk pricing
             </span>
             <h1 className="mt-2 text-balance text-[26px] font-bold leading-[1.1] tracking-tight">
-              Upgrade your room to a{" "}
+              Enterprise-grade{" "}
               <span className="bg-gradient-to-r from-primary to-rose-400 bg-clip-text text-transparent">
-                smart interactive screen
-              </span>
-              .
+                interactive displays
+              </span>{" "}
+              for modern workspaces.
             </h1>
             <p className="mt-1.5 text-[13px] leading-snug text-white/65">
-              Tell us about your space — get a custom quote and free demo in 30 seconds.
+              Get a custom quote with bulk pricing and free installation — delivered in 30 seconds.
             </p>
           </div>
 
           {/* DESKTOP pitch */}
           <div className="hidden lg:block">
             <h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight lg:text-[3.4rem]">
-              The boardroom-grade smart screen{" "}
+              Transform your workspace with{" "}
               <span className="bg-gradient-to-r from-primary to-rose-400 bg-clip-text text-transparent">
-                your team actually uses.
+                India's most advanced interactive display.
               </span>
             </h1>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70 lg:text-lg">
-              IMPEX xSeries replaces your projector, whiteboard and TV with one
-              ultra-bright 4K touch panel — set up by us, in any city in India.
+              IMPEX xSeries combines 4K clarity, intelligent touch technology, and seamless collaboration tools — professionally installed across India with comprehensive support.
             </p>
 
             <ul className="mt-6 grid grid-cols-2 gap-2.5">
