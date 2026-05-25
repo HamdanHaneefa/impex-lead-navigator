@@ -365,7 +365,7 @@ function ChoiceGrid({
               selected
                 ? "border-primary bg-primary/10 ring-2 ring-primary/40"
                 : "border-white/10",
-              large ? "min-h-[88px] flex-col items-start justify-center" : "min-h-[64px]",
+              large ? "min-h-[64px] flex-col items-start justify-center sm:min-h-[88px]" : "min-h-[48px] sm:min-h-[64px]",
             )}
           >
             {opt.icon && (
