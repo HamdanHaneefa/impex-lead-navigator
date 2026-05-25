@@ -90,4 +90,41 @@
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur;
   }
+
+  /* Fix autofill white background - most aggressive approach */
+  input.autofill-dark:-webkit-autofill,
+  input.autofill-dark:-webkit-autofill:hover,
+  input.autofill-dark:-webkit-autofill:focus,
+  input.autofill-dark:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px rgba(15, 15, 15, 0.95) inset !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.95) !important;
+    caret-color: white !important;
+    border-radius: 0 !important;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px rgba(15, 15, 15, 0.95) inset !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.95) !important;
+    caret-color: white !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+
+  /* Firefox autofill */
+  input:-moz-autofill,
+  input:-moz-autofill-preview {
+    filter: none !important;
+    background-color: rgba(15, 15, 15, 0.95) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  /* Additional autofill fix for all input types */
+  input[type="text"]:-webkit-autofill,
+  input[type="email"]:-webkit-autofill,
+  input[type="tel"]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(15, 15, 15, 0.95) inset !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.95) !important;
+  }
 }

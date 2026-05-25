@@ -16,6 +16,8 @@ import {
   ShieldCheck,
   Sparkles,
   User,
+  Zap,
+  Briefcase,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -98,6 +100,7 @@ export function LeadSurvey() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const stepIndex = STEP_ORDER.indexOf(step);
   const progress = step === "success" ? 100 : ((stepIndex + 1) / (STEP_ORDER.length + 1)) * 100;
@@ -108,9 +111,27 @@ export function LeadSurvey() {
     if (i > 0) setStep(STEP_ORDER[i - 1]);
   };
 
+  const resetForm = () => {
+    setStep("environment");
+    setEnvironment("");
+    setSize("");
+    setQuantity("");
+    setTimeline("");
+    setDetails({
+      full_name: "",
+      email: "",
+      phone: "",
+      organization: "",
+      city: "",
+      role: "",
+      notes: "",
+    });
+    setErrors({});
+    setFocusedField(null);
+  };
+
   function selectAndAdvance(setter: (v: string) => void, value: string, nextStep: StepKey) {
     setter(value);
-    // Tiny delay so the user sees their selection animate before advancing
     setTimeout(() => next(nextStep), 180);
   }
 
@@ -166,7 +187,7 @@ export function LeadSurvey() {
       case "timeline":
         return { eyebrow: "Step 4 of 5", title: "When do you need it installed?", sub: "We deliver and install across India." };
       case "details":
-        return { eyebrow: "Step 5 of 5", title: "Last step — where should we send the quote?", sub: "Our team will reach out within 1 working day." };
+        return { eyebrow: "Final Step", title: "Get your personalized quote", sub: "Our team will reach out within 1 working day with pricing and a free demo." };
       default:
         return { eyebrow: "", title: "", sub: "" };
     }
@@ -196,7 +217,6 @@ export function LeadSurvey() {
         </header>
       )}
 
-
       {/* Steps */}
       {step === "environment" && (
         <ChoiceGrid options={ENV_OPTIONS} value={environment} onSelect={(v) => selectAndAdvance(setEnvironment, v, "size")} />
@@ -212,113 +232,186 @@ export function LeadSurvey() {
       )}
 
       {step === "details" && (
-        <div className="space-y-4">
-          <Field label="Full name" icon={<User className="size-4" />} error={errors.full_name}>
-            <Input
-              autoComplete="name"
-              inputMode="text"
-              placeholder="e.g. Anita Sharma"
+        <div className="space-y-5">
+          {/* Premium Card Layout */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {/* Name */}
+            <FloatingLabelInput
+              icon={<User className="size-4" />}
+              label="Full name"
               value={details.full_name}
-              onChange={(e) => setDetails({ ...details, full_name: e.target.value })}
-              className="h-12 text-base"
+              onChange={(v) => setDetails({ ...details, full_name: v })}
+              error={errors.full_name}
+              placeholder="Anita Sharma"
+              focused={focusedField === "name"}
+              onFocus={() => setFocusedField("name")}
+              onBlur={() => setFocusedField(null)}
             />
-          </Field>
-          <Field label="Work email" icon={<Mail className="size-4" />} error={errors.email}>
-            <Input
-              autoComplete="email"
-              inputMode="email"
+
+            {/* Email */}
+            <FloatingLabelInput
+              icon={<Mail className="size-4" />}
+              label="Work email"
               type="email"
-              placeholder="you@organization.com"
               value={details.email}
-              onChange={(e) => setDetails({ ...details, email: e.target.value })}
-              className="h-12 text-base"
+              onChange={(v) => setDetails({ ...details, email: v })}
+              error={errors.email}
+              placeholder="you@organization.com"
+              focused={focusedField === "email"}
+              onFocus={() => setFocusedField("email")}
+              onBlur={() => setFocusedField(null)}
             />
-          </Field>
-          <Field label="Phone / WhatsApp" icon={<Phone className="size-4" />} error={errors.phone}>
-            <Input
-              autoComplete="tel"
-              inputMode="tel"
-              type="tel"
-              placeholder="+91 98xxx xxxxx"
-              value={details.phone}
-              onChange={(e) => setDetails({ ...details, phone: e.target.value })}
-              className="h-12 text-base"
-            />
-          </Field>
-          <Field label="Organization / Institute" icon={<Building2 className="size-4" />} error={errors.organization}>
-            <Input
-              placeholder="e.g. Greenfield International School"
-              value={details.organization}
-              onChange={(e) => setDetails({ ...details, organization: e.target.value })}
-              className="h-12 text-base"
-            />
-          </Field>
-          <div className="grid grid-cols-2 gap-3">
-            <Field label="City" icon={<MapPin className="size-4" />}>
-              <Input
-                placeholder="City"
-                value={details.city}
-                onChange={(e) => setDetails({ ...details, city: e.target.value })}
-                className="h-12 text-base"
-              />
-            </Field>
-            <Field label="Your role" icon={<User className="size-4" />}>
-              <Input
-                placeholder="Principal, IT Head…"
-                value={details.role}
-                onChange={(e) => setDetails({ ...details, role: e.target.value })}
-                className="h-12 text-base"
-              />
-            </Field>
           </div>
-          <Field label="Anything specific we should know? (optional)">
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {/* Phone */}
+            <FloatingLabelInput
+              icon={<Phone className="size-4" />}
+              label="Phone / WhatsApp"
+              type="tel"
+              value={details.phone}
+              onChange={(v) => setDetails({ ...details, phone: v })}
+              error={errors.phone}
+              placeholder="+91 98xxx xxxxx"
+              focused={focusedField === "phone"}
+              onFocus={() => setFocusedField("phone")}
+              onBlur={() => setFocusedField(null)}
+            />
+
+            {/* Organization */}
+            <FloatingLabelInput
+              icon={<Building2 className="size-4" />}
+              label="Organization / Institute"
+              value={details.organization}
+              onChange={(v) => setDetails({ ...details, organization: v })}
+              error={errors.organization}
+              placeholder="Greenfield International School"
+              focused={focusedField === "org"}
+              onFocus={() => setFocusedField("org")}
+              onBlur={() => setFocusedField(null)}
+            />
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {/* City */}
+            <FloatingLabelInput
+              icon={<MapPin className="size-4" />}
+              label="City (optional)"
+              value={details.city}
+              onChange={(v) => setDetails({ ...details, city: v })}
+              placeholder="Mumbai"
+              focused={focusedField === "city"}
+              onFocus={() => setFocusedField("city")}
+              onBlur={() => setFocusedField(null)}
+            />
+
+            {/* Role */}
+            <FloatingLabelInput
+              icon={<Briefcase className="size-4" />}
+              label="Your role (optional)"
+              value={details.role}
+              onChange={(v) => setDetails({ ...details, role: v })}
+              placeholder="Principal, IT Head..."
+              focused={focusedField === "role"}
+              onFocus={() => setFocusedField("role")}
+              onBlur={() => setFocusedField(null)}
+            />
+          </div>
+
+          {/* Notes */}
+          <div className="relative">
+            <label className="mb-2 block text-xs font-medium text-white/70">
+              Special requirements? (optional)
+            </label>
             <Textarea
               rows={3}
               maxLength={1000}
-              placeholder="Room size, existing setup, special requirements…"
+              placeholder="Room size, existing setup, budget constraints..."
               value={details.notes}
               onChange={(e) => setDetails({ ...details, notes: e.target.value })}
-              className="text-base"
+              className="resize-none border-white/20 bg-white/5 text-base backdrop-blur-sm transition-all focus:border-primary/60 focus:bg-white/10"
             />
-          </Field>
+          </div>
 
+          {/* Submit Button */}
           <Button
             size="lg"
             disabled={submitting}
             onClick={handleSubmit}
-            className="mt-2 h-14 w-full rounded-xl bg-primary text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 hover:bg-primary/90"
+            className="group relative mt-4 h-14 w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary via-primary to-rose-500 text-base font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40"
           >
-            {submitting ? (
-              <>
-                <Loader2 className="size-5 animate-spin" /> Submitting…
-              </>
-            ) : (
-              <>
-                Get my free quote <ArrowRight className="size-5" />
-              </>
-            )}
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              {submitting ? (
+                <>
+                  <Loader2 className="size-5 animate-spin" /> Processing...
+                </>
+              ) : (
+                <>
+                  <Zap className="size-5" /> Get my free quote
+                  <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
+                </>
+              )}
+            </span>
+            <div className="absolute inset-0 -z-0 bg-gradient-to-r from-rose-500 to-primary opacity-0 transition-opacity group-hover:opacity-100" />
           </Button>
+
           <p className="text-center text-[11px] leading-relaxed text-white/50">
-            By submitting, you agree to be contacted by IMPEX about the xSeries. We respect your privacy.
+            🔒 Your information is secure. We'll only use it to send your quote.
           </p>
         </div>
       )}
 
       {step === "success" && (
-        <div className="py-4 text-center">
-          <div className="mx-auto mb-5 grid size-16 place-items-center rounded-full bg-primary/15 text-primary ring-1 ring-primary/30">
-            <Check className="size-8" />
+        <div className="py-6 text-center sm:py-8">
+          <div className="mx-auto mb-6 grid size-20 place-items-center rounded-full bg-gradient-to-br from-primary/20 to-primary/5 ring-1 ring-primary/30">
+            <div className="grid size-14 place-items-center rounded-full bg-primary/20">
+              <Check className="size-7 text-primary" strokeWidth={3} />
+            </div>
           </div>
-          <h2 className="text-2xl font-semibold sm:text-3xl">You're on the list 🎉</h2>
-          <p className="mx-auto mt-3 max-w-md text-sm text-white/70 sm:text-base">
-            Thanks for your interest in the IMPEX xSeries. A specialist will call you within 1 working
-            day with a tailored quote and a free on-site demo invitation.
+          
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Request Submitted Successfully</h2>
+          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70">
+            Thank you for your interest in IMPEX xSeries Interactive Displays. Our sales specialist will contact you within one business day with a personalized quote and complimentary on-site demonstration.
           </p>
-          <div className="mt-6 grid gap-3 text-left sm:grid-cols-3">
-            <SummaryStat icon={<Monitor className="size-4" />} label="Environment" value={labelFor(ENV_OPTIONS, environment)} />
-            <SummaryStat icon={<Package className="size-4" />} label="Size & Qty" value={`${labelFor(SIZE_OPTIONS, size)} • ${labelFor(QTY_OPTIONS, quantity)}`} />
-            <SummaryStat icon={<CalendarClock className="size-4" />} label="Timeline" value={labelFor(TIMELINE_OPTIONS, timeline)} />
+
+          <div className="mx-auto mt-8 max-w-2xl">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/50">Your Selection Summary</h3>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <SummaryStat icon={<Monitor className="size-4" />} label="Environment" value={labelFor(ENV_OPTIONS, environment)} />
+              <SummaryStat icon={<Package className="size-4" />} label="Size & Quantity" value={`${labelFor(SIZE_OPTIONS, size)} • ${labelFor(QTY_OPTIONS, quantity)}`} />
+              <SummaryStat icon={<CalendarClock className="size-4" />} label="Timeline" value={labelFor(TIMELINE_OPTIONS, timeline)} />
+            </div>
           </div>
+
+          <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-center">
+            <button
+              onClick={resetForm}
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary/90"
+            >
+              <ArrowRight className="size-4" />
+              Submit Another Request
+            </button>
+            <a 
+              href="https://ifpd.impexstore.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/80 transition-all hover:border-primary/60 hover:bg-white/10 hover:text-white"
+            >
+              <Monitor className="size-4" />
+              Explore Product Catalog
+            </a>
+            <a 
+              href="tel:+918047181903"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/80 transition-all hover:border-primary/60 hover:bg-white/10 hover:text-white"
+            >
+              <Phone className="size-4" />
+              Call Sales Team
+            </a>
+          </div>
+
+          <p className="mt-6 text-xs text-white/40">
+            Reference ID: {new Date().getTime().toString(36).toUpperCase()}
+          </p>
         </div>
       )}
 
@@ -337,6 +430,80 @@ export function LeadSurvey() {
 
 function labelFor(opts: ChoiceOption[], v: string) {
   return opts.find((o) => o.value === v)?.label ?? "—";
+}
+
+function FloatingLabelInput({
+  icon,
+  label,
+  value,
+  onChange,
+  error,
+  placeholder,
+  type = "text",
+  focused,
+  onFocus,
+  onBlur,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  error?: string;
+  placeholder: string;
+  type?: string;
+  focused: boolean;
+  onFocus: () => void;
+  onBlur: () => void;
+}) {
+  const hasValue = value.length > 0;
+  
+  return (
+    <div className="relative">
+      <div
+        className={cn(
+          "relative overflow-hidden rounded-xl border bg-white/5 backdrop-blur-sm transition-all",
+          focused ? "border-primary/60 bg-white/10 shadow-lg shadow-primary/10" : "border-white/20",
+          error && "border-destructive/60"
+        )}
+      >
+        <div className="flex items-center gap-3 p-4">
+          <span className={cn("shrink-0 transition-colors", focused ? "text-primary" : "text-white/50")}>
+            {icon}
+          </span>
+          <div className="relative flex-1 min-w-0">
+            <label
+              className={cn(
+                "pointer-events-none absolute left-0 origin-left transition-all duration-200",
+                hasValue || focused
+                  ? "-translate-y-3 scale-75 text-[10px] font-medium text-white/70"
+                  : "translate-y-0 scale-100 text-sm text-white/50"
+              )}
+            >
+              {label}
+            </label>
+            <input
+              type={type}
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              placeholder={focused ? placeholder : ""}
+              autoComplete={type === "email" ? "email" : type === "tel" ? "tel" : "name"}
+              name={type === "email" ? "email" : type === "tel" ? "tel" : "name"}
+              className={cn(
+                "autofill-dark w-full border-none bg-transparent text-base text-white outline-none placeholder:text-white/30",
+                hasValue || focused ? "mt-3" : "mt-0"
+              )}
+            />
+          </div>
+        </div>
+        {focused && (
+          <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-primary to-rose-500" />
+        )}
+      </div>
+      {error && <p className="mt-1 text-xs font-medium text-destructive">{error}</p>}
+    </div>
+  );
 }
 
 function ChoiceGrid({
@@ -405,35 +572,14 @@ function ChoiceGrid({
   );
 }
 
-function Field({
-  label,
-  icon,
-  error,
-  children,
-}: {
-  label: string;
-  icon?: React.ReactNode;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <label className="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-white/70">
-        {icon} {label}
-      </label>
-      {children}
-      {error && <p className="mt-1 text-xs font-medium text-destructive">{error}</p>}
-    </div>
-  );
-}
-
 function SummaryStat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
-      <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-white/50">
-        {icon} {label}
+    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-left backdrop-blur-sm">
+      <div className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-white/50">
+        <span className="text-primary">{icon}</span>
+        {label}
       </div>
-      <div className="mt-1 text-sm font-semibold">{value}</div>
+      <div className="text-base font-semibold text-white">{value}</div>
     </div>
   );
 }

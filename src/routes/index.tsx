@@ -33,7 +33,15 @@ function LandingPage() {
             <img src={logo} alt="IMPEX" className="h-8 w-auto sm:h-10" />
             <span className="ml-1 text-xs font-medium text-white/60 sm:text-sm">xSeries</span>
           </div>
-          <div className="flex items-center gap-2 text-[11px] text-white/70 sm:text-sm">
+          <div className="flex items-center gap-2 text-[11px] text-white/70 sm:gap-3 sm:text-sm">
+            <a 
+              href="https://ifpd.impexstore.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hidden items-center gap-1 rounded-full border border-white/10 px-3 py-1 font-medium transition-colors hover:border-primary/60 hover:text-white sm:inline-flex"
+            >
+              Learn more
+            </a>
             <a href="tel:+918047181903" className="rounded-full border border-white/10 px-3 py-1 font-medium hover:border-primary/60 hover:text-white">
               Call sales
             </a>
@@ -111,7 +119,21 @@ function LandingPage() {
       </section>
 
       <footer className="border-t border-white/5 py-6 text-center text-[11px] text-white/40">
-        © {new Date().getFullYear()} IMPEX Appliances · xSeries Interactive Displays
+        <div className="mx-auto max-w-6xl px-4">
+          <p>
+            © {new Date().getFullYear()} IMPEX Appliances · xSeries Interactive Displays
+          </p>
+          <p className="mt-2">
+            <a 
+              href="https://ifpd.impexstore.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white/50 transition-colors hover:text-primary hover:underline"
+            >
+              Learn more about our products
+            </a>
+          </p>
+        </div>
       </footer>
     </main>
   );
