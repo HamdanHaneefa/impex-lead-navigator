@@ -59,27 +59,27 @@ function LandingPage() {
               <Zap className="size-3 text-primary" /> Limited offer · Free demo + bulk pricing
             </span>
             <h1 className="mt-2 text-balance text-[26px] font-bold leading-[1.1] tracking-tight">
-              Enterprise-grade{" "}
+              Professional{" "}
               <span className="bg-gradient-to-r from-primary to-rose-400 bg-clip-text text-transparent">
                 interactive displays
               </span>{" "}
-              for modern workspaces.
+              for schools and offices.
             </h1>
             <p className="mt-1.5 text-[13px] leading-snug text-white/65">
-              Get a custom quote with bulk pricing and free installation — delivered in 30 seconds.
+              Get a custom quote with installation included — delivered in 30 seconds.
             </p>
           </div>
 
           {/* DESKTOP pitch */}
           <div className="hidden lg:block">
             <h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight lg:text-[3.4rem]">
-              Transform your workspace with{" "}
+              Professional interactive displays{" "}
               <span className="bg-gradient-to-r from-primary to-rose-400 bg-clip-text text-transparent">
-                India's most advanced interactive display.
+                built for Indian classrooms and boardrooms.
               </span>
             </h1>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70 lg:text-lg">
-              IMPEX xSeries combines 4K clarity, intelligent touch technology, and seamless collaboration tools — professionally installed across India with comprehensive support.
+              IMPEX xSeries delivers 4K clarity, responsive touch technology, and reliable performance — with professional installation and support across India.
             </p>
 
             <ul className="mt-6 grid grid-cols-2 gap-2.5">
