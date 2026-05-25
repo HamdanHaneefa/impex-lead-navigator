@@ -29,10 +29,14 @@ function LandingPage() {
       {/* Compact top bar */}
       <header className="sticky top-0 z-20 border-b border-white/5 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3">
-          <div className="flex items-center gap-2">
+          <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-2 transition-opacity hover:opacity-80"
+            aria-label="Scroll to top"
+          >
             <img src={logo} alt="IMPEX" className="h-8 w-auto sm:h-10" />
             <span className="ml-1 text-xs font-medium text-white/60 sm:text-sm">xSeries</span>
-          </div>
+          </button>
           <div className="flex items-center gap-2 text-[11px] text-white/70 sm:gap-3 sm:text-sm">
             <a 
               href="https://ifpd.impexstore.com/" 
