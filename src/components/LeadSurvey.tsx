@@ -350,7 +350,7 @@ function ChoiceGrid({
   large?: boolean;
 }) {
   return (
-    <div className={cn("grid gap-3", columns === 2 ? "grid-cols-2" : "grid-cols-1")}>
+    <div className={cn("grid gap-2 sm:gap-3", columns === 2 ? "grid-cols-2" : "grid-cols-1")}>
       {options.map((opt) => {
         const selected = value === opt.value;
         return (
@@ -359,7 +359,7 @@ function ChoiceGrid({
             type="button"
             onClick={() => onSelect(opt.value)}
             className={cn(
-              "group relative flex items-center gap-3 rounded-xl border bg-white/[0.03] p-4 text-left transition-all",
+              "group relative flex items-center gap-3 rounded-xl border bg-white/[0.03] p-2.5 text-left transition-all sm:p-4",
               "hover:border-primary/60 hover:bg-white/[0.06] active:scale-[0.98]",
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
               selected
