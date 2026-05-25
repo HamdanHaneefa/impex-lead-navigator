@@ -170,28 +170,29 @@ export function LeadSurvey() {
   }, [step]);
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-card/70 p-5 shadow-2xl shadow-black/40 backdrop-blur sm:p-7">
+    <div className="rounded-2xl border border-white/10 bg-card/70 p-3.5 shadow-2xl shadow-black/40 backdrop-blur sm:p-7">
       {/* Progress */}
       {step !== "success" && (
-        <div className="mb-6">
-          <div className="mb-2 flex items-center justify-between text-xs text-white/60">
+        <div className="mb-3 sm:mb-6">
+          <div className="mb-1.5 flex items-center justify-between text-[10px] text-white/60 sm:text-xs">
             <span className="font-medium uppercase tracking-wider text-primary">
               {stepTitle.eyebrow}
             </span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <Progress value={progress} className="h-1.5 bg-white/10" />
+          <Progress value={progress} className="h-1 bg-white/10 sm:h-1.5" />
         </div>
       )}
 
       {step !== "success" && (
-        <header className="mb-6">
-          <h2 className="text-balance text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+        <header className="mb-3 sm:mb-6">
+          <h2 className="text-balance text-lg font-semibold leading-tight tracking-tight sm:text-3xl">
             {stepTitle.title}
           </h2>
-          <p className="mt-2 text-sm text-white/60 sm:text-base">{stepTitle.sub}</p>
+          <p className="mt-1 text-xs text-white/60 sm:mt-2 sm:text-base">{stepTitle.sub}</p>
         </header>
       )}
+
 
       {/* Steps */}
       {step === "environment" && (
@@ -349,7 +350,7 @@ function ChoiceGrid({
   large?: boolean;
 }) {
   return (
-    <div className={cn("grid gap-3", columns === 2 ? "grid-cols-2" : "grid-cols-1")}>
+    <div className={cn("grid gap-2 sm:gap-3", columns === 2 ? "grid-cols-2" : "grid-cols-1")}>
       {options.map((opt) => {
         const selected = value === opt.value;
         return (
@@ -358,13 +359,13 @@ function ChoiceGrid({
             type="button"
             onClick={() => onSelect(opt.value)}
             className={cn(
-              "group relative flex items-center gap-3 rounded-xl border bg-white/[0.03] p-4 text-left transition-all",
+              "group relative flex items-center gap-3 rounded-xl border bg-white/[0.03] p-2.5 text-left transition-all sm:p-4",
               "hover:border-primary/60 hover:bg-white/[0.06] active:scale-[0.98]",
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
               selected
                 ? "border-primary bg-primary/10 ring-2 ring-primary/40"
                 : "border-white/10",
-              large ? "min-h-[88px] flex-col items-start justify-center" : "min-h-[64px]",
+              large ? "min-h-[64px] flex-col items-start justify-center sm:min-h-[88px]" : "min-h-[48px] sm:min-h-[64px]",
             )}
           >
             {opt.icon && (

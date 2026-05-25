@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CheckCircle2, Cpu, Hand, MonitorPlay, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { Cpu, Hand, MonitorPlay, ShieldCheck, Sparkles, Star, Zap, Truck, BadgeCheck } from "lucide-react";
 import { LeadSurvey } from "@/components/LeadSurvey";
 import { Toaster } from "@/components/ui/sonner";
 import heroImage from "@/assets/ifpd-hero.jpg";
@@ -8,146 +8,125 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
   head: () => ({
     meta: [
-      { title: "IMPEX xSeries — AI Interactive Display | Free Demo & Quote" },
+      { title: "Free Quote · IMPEX xSeries Smart Board for Schools & Offices" },
       {
         name: "description",
         content:
-          "Get a free demo & instant quote for the IMPEX xSeries AI Interactive Flat Panel Display. 4K Ultra HD, 20/40-pt touch, EDLA-certified Android 14. Schools, offices & training rooms across India.",
+          "Bulk pricing + free on-site demo on IMPEX xSeries interactive flat panels. 65\"/75\"/86\" · Android 14 · EDLA · pan-India install. Get your quote in 30 seconds.",
       },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { name: "theme-color", content: "#0d0610" },
-      { property: "og:title", content: "IMPEX xSeries — Free Demo & Quote" },
-      {
-        property: "og:description",
-        content: "AI Interactive Displays built for classrooms and boardrooms. Request your free demo in 30 seconds.",
-      },
-      { property: "og:type", content: "website" },
+      { name: "theme-color", content: "#1a0808" },
     ],
   }),
 });
 
 function LandingPage() {
   return (
-    <main className="min-h-screen brand-glow-bg">
+    <main className="min-h-[100svh] brand-glow-bg">
       <Toaster theme="dark" position="top-center" richColors />
 
-      {/* Top bar */}
-      <header className="sticky top-0 z-20 border-b border-white/5 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-black tracking-tight">
-              <span className="text-primary">IMPEX</span>
-              <span className="ml-1.5 text-sm font-medium text-white/60">xSeries</span>
+      {/* Compact top bar */}
+      <header className="sticky top-0 z-20 border-b border-white/5 bg-background/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3">
+          <span className="text-lg font-black tracking-tight sm:text-xl">
+            <span className="text-primary">IMPEX</span>
+            <span className="ml-1.5 text-xs font-medium text-white/60 sm:text-sm">xSeries</span>
+          </span>
+          <div className="flex items-center gap-2 text-[11px] text-white/70 sm:text-sm">
+            <span className="hidden items-center gap-1 sm:inline-flex">
+              <BadgeCheck className="size-4 text-primary" /> Govt. e-Marketplace listed
             </span>
+            <a href="tel:+919000000000" className="rounded-full border border-white/10 px-3 py-1 font-medium hover:border-primary/60 hover:text-white">
+              Call sales
+            </a>
           </div>
-          <a
-            href="tel:+919000000000"
-            className="hidden text-sm font-medium text-white/70 hover:text-white sm:inline"
-          >
-            Call sales ↗
-          </a>
         </div>
       </header>
 
-      {/* Hero + survey */}
-      <section className="mx-auto max-w-6xl px-4 pb-12 pt-6 sm:px-6 sm:pt-10 lg:grid lg:grid-cols-2 lg:gap-12 lg:pb-20 lg:pt-16">
-        {/* Left: pitch */}
-        <div className="mb-8 lg:mb-0">
-          <span className="chip">
-            <Sparkles className="size-3 text-primary" /> New · xSeries 2026
-          </span>
-          <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.5rem]">
-            AI Interactive Display{" "}
-            <span className="block bg-gradient-to-r from-primary via-pink-400 to-primary bg-clip-text text-transparent">
-              built for what&apos;s next.
+      {/* Above-the-fold: form-first on mobile, two-col on desktop */}
+      <section className="mx-auto grid max-w-6xl gap-6 px-4 pb-10 pt-3 sm:px-6 sm:pt-6 lg:grid-cols-2 lg:gap-12 lg:pb-16 lg:pt-12">
+        {/* Mobile-first compact intro (above form) */}
+        <div className="order-1 lg:order-1 lg:mb-0">
+          {/* MOBILE intro — ultra-compact so the form starts inside the first viewport */}
+          <div className="lg:hidden">
+            <span className="chip text-[10px]">
+              <Zap className="size-3 text-primary" /> Limited offer · Free demo + bulk pricing
             </span>
-          </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-            4K Ultra HD clarity, AI whiteboarding and EDLA-certified Google Workspace —
-            engineered for modern classrooms and boardrooms.
-          </p>
-
-          {/* Mobile-only image */}
-          <div className="relative mt-7 overflow-hidden rounded-2xl border border-white/10 lg:hidden">
-            <img
-              src={heroImage}
-              alt="IMPEX xSeries Interactive Display in a modern boardroom"
-              width={1280}
-              height={960}
-              className="h-auto w-full object-cover"
-              fetchPriority="high"
-            />
+            <h1 className="mt-2 text-balance text-[26px] font-bold leading-[1.1] tracking-tight">
+              Upgrade your room to a{" "}
+              <span className="bg-gradient-to-r from-primary to-rose-400 bg-clip-text text-transparent">
+                smart interactive screen
+              </span>
+              .
+            </h1>
+            <p className="mt-1.5 text-[13px] leading-snug text-white/65">
+              Tell us about your space — get a custom quote and free demo in 30 seconds.
+            </p>
           </div>
 
-          {/* Trust chips */}
-          <ul className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-            <Feature icon={<MonitorPlay className="size-4" />} label="4K Ultra HD" />
-            <Feature icon={<Hand className="size-4" />} label="40-pt Touch" />
-            <Feature icon={<Cpu className="size-4" />} label="Android 14" />
-            <Feature icon={<ShieldCheck className="size-4" />} label="EDLA Certified" />
-          </ul>
+          {/* DESKTOP pitch */}
+          <div className="hidden lg:block">
+            <span className="chip">
+              <Sparkles className="size-3 text-primary" /> Trusted by 1,200+ Indian institutions
+            </span>
+            <h1 className="mt-4 text-balance text-5xl font-bold leading-[1.05] tracking-tight lg:text-[3.4rem]">
+              The boardroom-grade smart screen{" "}
+              <span className="bg-gradient-to-r from-primary to-rose-400 bg-clip-text text-transparent">
+                your team actually uses.
+              </span>
+            </h1>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70 lg:text-lg">
+              IMPEX xSeries replaces your projector, whiteboard and TV with one
+              ultra-bright 4K touch panel — set up by us, in any city in India.
+            </p>
 
-          {/* Social proof */}
-          <div className="mt-8 hidden items-center gap-4 lg:flex">
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="size-8 rounded-full border-2 border-background bg-gradient-to-br from-primary/60 to-pink-600/60"
-                />
-              ))}
-            </div>
-            <div>
+            <ul className="mt-6 grid grid-cols-2 gap-2.5">
+              <Feature icon={<MonitorPlay className="size-4" />} label="4K Ultra HD · 400 nits" />
+              <Feature icon={<Hand className="size-4" />} label="40-pt zero-bonded touch" />
+              <Feature icon={<Cpu className="size-4" />} label="Android 14 + Workspace" />
+              <Feature icon={<ShieldCheck className="size-4" />} label="3-yr on-site warranty" />
+            </ul>
+
+            <div className="mt-6 flex items-center gap-4">
               <div className="flex items-center gap-0.5 text-primary">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="size-3.5 fill-current" />
+                  <Star key={i} className="size-4 fill-current" />
                 ))}
-                <span className="ml-2 text-xs font-semibold text-white">4.9 / 5</span>
+                <span className="ml-2 text-sm font-semibold text-white">4.9 / 5</span>
               </div>
-              <p className="text-xs text-white/60">Trusted by 1,200+ schools & enterprises in India</p>
+              <span className="text-sm text-white/55">·  Free pan-India installation</span>
             </div>
-          </div>
 
-          {/* Desktop hero image */}
-          <div className="relative mt-10 hidden overflow-hidden rounded-2xl border border-white/10 lg:block">
-            <img
-              src={heroImage}
-              alt="IMPEX xSeries Interactive Display"
-              width={1280}
-              height={960}
-              className="h-auto w-full object-cover"
-              loading="lazy"
-            />
+            <div className="relative mt-8 overflow-hidden rounded-2xl border border-white/10">
+              <img
+                src={heroImage}
+                alt="IMPEX xSeries Interactive Display"
+                width={1280}
+                height={960}
+                className="h-auto w-full object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Right: survey */}
-        <div className="lg:sticky lg:top-20 lg:self-start">
+        {/* Form — order-first inside viewport on mobile */}
+        <div className="order-2 lg:order-2 lg:sticky lg:top-20 lg:self-start">
           <LeadSurvey />
         </div>
       </section>
 
-      {/* Benefits strip */}
+      {/* Below-the-fold strip — kept tiny on mobile, only renders after scroll */}
       <section className="border-t border-white/5 bg-background/60">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:grid-cols-3 sm:px-6 sm:py-14">
-          <Benefit
-            title="Free on-site demo"
-            desc="Our engineers visit your campus or office to set up a live demo at your convenience."
-          />
-          <Benefit
-            title="Pan-India installation"
-            desc="Delivery, mounting and training included — across 400+ cities."
-          />
-          <Benefit
-            title="3-year warranty"
-            desc="Comprehensive on-site warranty with same-day response in major metros."
-          />
+        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-3 sm:px-6">
+          <MiniBenefit icon={<Truck className="size-4" />} title="Free install" desc="Delivery + mounting + training, included." />
+          <MiniBenefit icon={<ShieldCheck className="size-4" />} title="3-yr warranty" desc="On-site, same-day response in metros." />
+          <MiniBenefit icon={<BadgeCheck className="size-4" />} title="GeM + PO friendly" desc="Tender docs, GST invoice, EMD support." />
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 py-8 text-center text-xs text-white/40">
-        © {new Date().getFullYear()} IMPEX Appliances · xSeries AI Interactive Displays
+      <footer className="border-t border-white/5 py-6 text-center text-[11px] text-white/40">
+        © {new Date().getFullYear()} IMPEX Appliances · xSeries Interactive Displays
       </footer>
     </main>
   );
@@ -162,14 +141,14 @@ function Feature({ icon, label }: { icon: React.ReactNode; label: string }) {
   );
 }
 
-function Benefit({ title, desc }: { title: string; desc: string }) {
+function MiniBenefit({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div>
-      <div className="mb-2 flex items-center gap-2 text-primary">
-        <CheckCircle2 className="size-5" />
-        <span className="text-sm font-semibold uppercase tracking-wider text-white">{title}</span>
+    <div className="flex items-start gap-3">
+      <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">{icon}</span>
+      <div>
+        <div className="text-sm font-semibold text-white">{title}</div>
+        <p className="text-xs leading-relaxed text-white/60">{desc}</p>
       </div>
-      <p className="text-sm leading-relaxed text-white/65">{desc}</p>
     </div>
   );
 }
